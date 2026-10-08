@@ -1,0 +1,49 @@
+# Sala 1 – Introducción a la seguridad ofensiva (TryHackMe)
+
+**Fecha:** 7 de octubre de 2026
+**Plataforma:** TryHackMe – Pre Security
+
+## Qué hice
+Practiqué cómo un atacante encuentra páginas ocultas en un sitio web,
+usando un banco de práctica llamado FakeBank.
+
+## Qué es la seguridad ofensiva
+Es pensar como un atacante para encontrar fallas antes que los
+criminales. Siempre se hace con permiso y en entornos autorizados
+(como los laboratorios de TryHackMe).
+
+## Páginas ocultas
+Son páginas que existen en un sitio pero no aparecen enlazadas en
+ningún menú. Si contienen algo sensible, son una vulnerabilidad.
+
+### Herramienta: dirb
+Prueba miles de nombres comunes de carpetas y páginas para descubrir
+las que existen.
+
+    dirb http://fakebank.thm
+
+### Cómo identificar la página oculta
+Revisar el código de respuesta HTTP de cada resultado:
+
+| Código | Significado |
+|--------|-------------|
+| 200 | La página existe y se puede abrir |
+| 301 / 302 | Redirección a otra dirección |
+| 403 | Existe, pero el acceso está prohibido |
+| 404 | No existe |
+
+### Resultado en FakeBank
+- `/bank-transfer` (200) → **página oculta y sensible**: permitía
+  hacer transferencias sin estar expuesta en el sitio.
+- `/images` (301) → redirección normal a la carpeta de imágenes.
+
+## Lección
+Ocultar una página no la protege. Las páginas sensibles necesitan
+autenticación y control de acceso.
+
+## Glosario
+- *hidden* = oculto
+- *path* = ruta
+- *directory* = carpeta / directorio
+- *response code* = código de respuesta
+- *found* = encontrado
