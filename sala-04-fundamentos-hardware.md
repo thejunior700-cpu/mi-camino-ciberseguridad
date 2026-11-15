@@ -2,7 +2,7 @@
 
 **Fecha:** 22 de octubre de 2026
 **Plataforma:** TryHackMe – reto forense "Case CB-0047"
-**Bandera:** THM{c0ld_b00t_c0mpl3t3}
+**Bandera:** [obtenida — no se publica por buenas prácticas]
 
 ---
 
@@ -46,7 +46,7 @@ Es el proceso de encender la máquina y cargar el sistema operativo. El
 disco desde el que arranca se llama **disco de arranque**.
 
 ### Concepto de seguridad: Cold Boot
-La bandera fue `THM{c0ld_b00t_c0mpl3t3}` ("cold boot complete"). Un
+La bandera obtenida hacía referencia a "cold boot complete". Un
 **cold boot attack** es una técnica forense real: la memoria RAM
 retiene datos unos segundos tras apagar la máquina, y de ahí se puede
 extraer información (incluso contraseñas). Por eso la evidencia se
