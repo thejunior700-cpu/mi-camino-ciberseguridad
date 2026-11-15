@@ -2,48 +2,61 @@
 
 **Fecha:** 22 de octubre de 2026
 **Plataforma:** TryHackMe – reto forense "Case CB-0047"
+**Bandera:** THM{c0ld_b00t_c0mpl3t3}
 
-## Qué hice
-Reconstruí una PC de escritorio pieza por pieza en un reto de
-forense digital: elegí los 7 componentes correctos (descartando
-"impostores"), arranqué la máquina, respondí un cuestionario de
-hardware y recuperé el archivo de evidencia.
+---
 
-## Los 7 componentes de una PC y su función
+## De qué trató
+Un reto de forense digital: reconstruí una PC de escritorio pieza por
+pieza, eligiendo las 7 correctas (descartando "impostoras"),
+arranqué la máquina, respondí un cuestionario de hardware y recuperé
+un archivo de evidencia.
 
-| Componente | Función | Dónde va |
-|------------|---------|----------|
-| CPU (procesador) | Procesa cada instrucción; "el cerebro" | Socket del CPU |
-| RAM (memoria) | Datos temporales de uso actual; se borra al apagar | Ranuras DIMM |
-| PSU (fuente) | Convierte la electricidad al voltaje de cada parte | Borde del chasis |
-| Adaptador de red | Envía/recibe datos por la red | Interno, atrás |
-| Panel I/O | Puertos externos: USB, HDMI, audio, Ethernet | Abertura trasera |
-| GPU (tarjeta gráfica) | Genera la imagen de la pantalla | Ranura PCIe x16 |
-| SSD (almacenamiento) | Guarda archivos y SO de forma permanente | Sobre la placa madre |
+---
 
-Todo se conecta a la **placa madre (motherboard)**, que enruta la
-comunicación entre todos los componentes.
+## Los componentes de una PC y qué hace cada uno
 
-## Las piezas "impostoras" (no van en una PC de escritorio)
-- Cargador de laptop, GPU de laptop → son de laptop, no de escritorio
-- Dongle Wi-Fi USB → accesorio externo (ya hay adaptador de red interno)
-- HDD → disco mecánico, más lento y antiguo que el SSD
+| Componente | Qué hace | Dónde va |
+|------------|----------|----------|
+| CPU (procesador) | Procesa cada instrucción. Es "el cerebro" | Socket en la placa madre |
+| RAM (memoria) | Guarda datos temporales que se usan ahora. Se borra al apagar | Ranuras DIMM |
+| PSU (fuente) | Convierte la electricidad del enchufe al voltaje de cada parte | Borde del chasis |
+| Placa madre (motherboard) | Conecta y comunica todos los componentes entre sí | Es la base de todo |
+| Almacenamiento (SSD/HDD) | Guarda archivos y el sistema de forma permanente | SSD: sobre la placa / HDD: bahía |
+| GPU (tarjeta gráfica) | Genera la imagen que se ve en pantalla | Ranura PCIe x16 |
+| Adaptador de red | Conecta la PC a la red / internet | Interno, parte trasera |
 
-## Lección clave: SSD vs HDD
-- **SSD:** sin partes móviles, rápido, silencioso. El correcto aquí.
-- **HDD:** discos magnéticos giratorios, más lento. La máquina avisó
-  "disco mecánico detectado" y pidió usar el disco más rápido (SSD).
+Las piezas "impostoras" eran de **laptop** o externas (cargador de
+laptop, GPU de laptop, dongle Wi-Fi USB): no van en una PC de
+escritorio.
 
-## Concepto de seguridad: Cold Boot
-La bandera fue `THM{c0ld_b00t_c0mpl3t3}`. Un **cold boot attack** es
-una técnica real: la RAM retiene datos unos segundos tras apagar la
-máquina, y de ahí se puede extraer información (incluso contraseñas).
-Por eso la evidencia se "extrajo de la memoria".
+---
+
+## Conceptos clave aprendidos
+
+### SSD vs HDD (almacenamiento)
+- **SSD (Solid State Drive):** sin partes móviles, rápido, silencioso.
+  Es el moderno. El reto pedía este.
+- **HDD (Hard Disk Drive):** usa discos magnéticos giratorios, es más
+  lento y antiguo. La máquina avisó "disco mecánico detectado" y pidió
+  usar el más rápido (SSD).
+
+### Qué es "arrancar" (boot)
+Es el proceso de encender la máquina y cargar el sistema operativo. El
+disco desde el que arranca se llama **disco de arranque**.
+
+### Concepto de seguridad: Cold Boot
+La bandera fue `THM{c0ld_b00t_c0mpl3t3}` ("cold boot complete"). Un
+**cold boot attack** es una técnica forense real: la memoria RAM
+retiene datos unos segundos tras apagar la máquina, y de ahí se puede
+extraer información (incluso contraseñas). Por eso la evidencia se
+"extrajo de la memoria".
 
 ## Glosario
 - *motherboard (MOBO)* = placa madre
+- *CPU* = procesador (el "cerebro")
+- *RAM* = memoria temporal de trabajo (se borra al apagar)
+- *PSU* = fuente de poder
 - *boot / cold boot* = arrancar / arranque en frío
 - *mechanical drive* = disco mecánico (HDD)
-- *VPN* = red privada virtual
-- *compromised* = comprometido (vulnerado)
 - *flag* = bandera (código que prueba que resolviste el reto)
