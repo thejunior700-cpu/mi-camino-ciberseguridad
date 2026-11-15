@@ -64,4 +64,14 @@ del archivo:
 - La `d` al inicio = es una carpeta (directory).
 - Las letras `r`, `w`, `x` = permiso de leer (read), escribir (write)
   y ejecutar (execute).
-Esto es clave en
+Esto es clave en seguridad, pero lo veré a fondo en la lección de
+Permisos.
+
+## Glosario
+- *path* = ruta (la dirección de un archivo o carpeta)
+- *absolute / relative path* = ruta absoluta / relativa
+- *working directory* = la carpeta en la que estoy
+- *home* = mi carpeta personal
+- *parent directory (`..`)* = la carpeta de arriba
+- *hidden file* = archivo oculto (empieza con `.`)
+- *flag / option* = una opción que modifica un comando (ej. `-a`)
