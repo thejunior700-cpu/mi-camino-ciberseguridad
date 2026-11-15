@@ -2,8 +2,7 @@
 
 **Fecha:** 12 de noviembre de 2026
 **Plataforma:** TryHackMe – Pre Security (Computer Fundamentals)
-**Bandera:** THM{8_computer_types}  ·  Examen final: 5/5
-
+**Bandera:** [obtenida — no se publica]  ·  Examen final: 5/5
 ---
 
 ## De qué trató
