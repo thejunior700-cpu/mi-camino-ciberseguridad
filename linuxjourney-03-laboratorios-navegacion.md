@@ -1,46 +1,67 @@
-# Linux Journey – Laboratorios de navegación
+# Linux Journey – Navegación (pwd, cd, ls)
 
 **Fecha:** 11 de octubre de 2026
-**Recurso:** LabEx (laboratorios prácticos de Linux Journey)
+**Recurso:** Linux Journey (Command Line) – módulo Grasshopper
 
-## Laboratorio 1 – Crear estructura de directorios (mkdir + cd)
-Armé la estructura de un proyecto web usando solo `mkdir` y `cd`.
+---
 
-Estructura creada:
+## Conceptos base
 
-    project/
-    ├── frontend/
-    │   ├── css/
-    │   └── js/
-    └── backend/
-        ├── api/
-        └── database/
+### El sistema de archivos es un árbol
+En Linux, todos los archivos y carpetas se organizan como un árbol
+que empieza en una única carpeta raíz, representada por `/`. De ahí
+cuelgan todas las demás carpetas y archivos.
 
-### Comando nuevo: mkdir (make directory)
-Crea carpetas. Puede crear varias a la vez separándolas con espacios.
+### Rutas: absolutas vs. relativas
+Una **ruta** es la dirección de un archivo o carpeta.
+- **Ruta absoluta:** empieza en la raíz `/` y da el camino completo.
+  Ej: `/home/pete/Movies`. Funciona desde donde sea que esté parado.
+- **Ruta relativa:** depende de dónde estoy ahora. Ej: si estoy en
+  `/home/pete`, puedo escribir solo `Movies`.
 
-    mkdir frontend backend
+---
 
-Luego entro a cada una con `cd` y creo sus subcarpetas:
+## Comandos
 
-    cd frontend
-    mkdir css js
-    cd ..
+### pwd (print working directory)
+Muestra en qué carpeta estoy ahora mismo. Solo informa, no me mueve.
+Es como el "estás aquí" de un mapa.
 
-Verifico mi avance con `pwd` (dónde estoy) y `ls` (qué hay).
+    pwd
+    /home/pete
 
-## Laboratorio 2 – pwd
-Repaso de `pwd`: confirma mi ubicación mostrando la ruta absoluta
-desde la raíz `/`. El sistema de archivos es un árbol y cada `/`
-separa una rama.
+### cd (change directory)
+Cambia de carpeta. Atajos importantes:
 
-## Concepto nuevo: sudo
-`sudo` ejecuta un comando como superusuario (root), como pedir
-permisos de administrador por un momento. Pide la contraseña y se
-usa con cuidado (instalar programas, tocar el sistema). Lo veré a
-fondo en la lección de Permisos.
+| Comando | Qué hace |
+|---------|----------|
+| `cd carpeta` | Entra a esa carpeta |
+| `cd ..` | Sube un nivel (a la carpeta padre) |
+| `cd ~` o `cd` solo | Va a mi carpeta personal (home) |
+| `cd -` | Vuelve a la carpeta donde estaba antes |
+| `cd "Con espacios"` | Carpetas con espacios, entre comillas |
 
-## Glosario
-- *mkdir (make directory)* = crear carpeta
-- *sudo* = ejecutar como superusuario / administrador
-- *nested directories* = carpetas anidadas (unas dentro de otras)
+Símbolos: `.` = la carpeta actual · `..` = la carpeta de arriba (padre)
+
+### ls (list)
+Lista lo que hay dentro de una carpeta.
+
+| Opción | Qué hace |
+|--------|----------|
+| `ls` | Lista archivos y carpetas |
+| `ls -a` | Incluye los ocultos (empiezan con `.`) |
+| `ls -l` | Formato largo: permisos, dueño, tamaño, fecha |
+| `ls -lh` | Igual que -l pero con tamaños legibles (KB, MB) |
+| `ls -t` | Ordena por fecha de modificación |
+
+Las opciones (flags) se combinan: `ls -la` es lo mismo que `ls -al`.
+
+---
+
+## Nota para más adelante: los permisos
+En `ls -l`, la primera columna (ej. `drwxr-x---`) son los **permisos**
+del archivo:
+- La `d` al inicio = es una carpeta (directory).
+- Las letras `r`, `w`, `x` = permiso de leer (read), escribir (write)
+  y ejecutar (execute).
+Esto es clave en
