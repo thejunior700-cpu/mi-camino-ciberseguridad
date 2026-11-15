@@ -3,47 +3,64 @@
 **Fecha:** 7 de octubre de 2026
 **Plataforma:** TryHackMe – Pre Security
 
-## Qué hice
-Practiqué cómo un atacante encuentra páginas ocultas en un sitio web,
-usando un banco de práctica llamado FakeBank.
+---
 
-## Qué es la seguridad ofensiva
-Es pensar como un atacante para encontrar fallas antes que los
-criminales. Siempre se hace con permiso y en entornos autorizados
-(como los laboratorios de TryHackMe).
+## Conceptos base
 
-## Páginas ocultas
-Son páginas que existen en un sitio pero no aparecen enlazadas en
-ningún menú. Si contienen algo sensible, son una vulnerabilidad.
+### ¿Qué es la seguridad ofensiva?
+Es pensar como un atacante para encontrar fallas en un sistema ANTES
+que los criminales. Siempre se hace con permiso y en entornos
+autorizados (como los laboratorios de TryHackMe). Lo opuesto es la
+seguridad defensiva (proteger y vigilar).
 
-### Herramienta: dirb
-Prueba miles de nombres comunes de carpetas y páginas para descubrir
-las que existen.
+### ¿Qué son las "páginas ocultas"?
+Son páginas que existen en un sitio web pero no están enlazadas en
+ningún menú visible. El dueño no las muestra, pero siguen ahí. Si
+contienen algo sensible (como un panel de administración), son una
+vulnerabilidad, porque un atacante puede encontrarlas.
+
+---
+
+## La herramienta: dirb
+`dirb` es una herramienta que prueba miles de nombres comunes de
+carpetas y páginas en un sitio web, para descubrir cuáles existen
+aunque no estén a la vista.
 
     dirb http://fakebank.thm
 
-### Cómo identificar la página oculta
-Revisar el código de respuesta HTTP de cada resultado:
+---
+
+## Cómo identificar la página oculta: los códigos HTTP
+Cada vez que pido una página, el servidor responde con un **código de
+respuesta** (un número que indica qué pasó):
 
 | Código | Significado |
 |--------|-------------|
-| 200 | La página existe y se puede abrir |
-| 301 / 302 | Redirección a otra dirección |
+| 200 | La página existe y se puede abrir (OK) |
+| 301 / 302 | Redirección: te manda a otra dirección |
 | 403 | Existe, pero el acceso está prohibido |
 | 404 | No existe |
 
-### Resultado en FakeBank
-- `/bank-transfer` (200) → **página oculta y sensible**: permitía
-  hacer transferencias sin estar expuesta en el sitio.
-- `/images` (301) → redirección normal a la carpeta de imágenes.
+La página oculta interesante suele ser la que da **200** y no es
+obvia.
+
+---
+
+## Qué hice (el caso FakeBank)
+Usé `dirb` sobre el banco de práctica FakeBank y encontré dos rutas:
+- `/bank-transfer` (código 200) → **página oculta y sensible**:
+  permitía hacer transferencias sin estar expuesta en el sitio. Esta
+  era la vulnerabilidad.
+- `/images` (código 301) → solo una redirección normal a la carpeta
+  de imágenes. Nada interesante.
 
 ## Lección
 Ocultar una página no la protege. Las páginas sensibles necesitan
-autenticación y control de acceso.
+autenticación y control de acceso de verdad.
 
 ## Glosario
-- *hidden* = oculto
-- *path* = ruta
+- *offensive security* = seguridad ofensiva (atacar para encontrar fallas)
+- *hidden page / path* = página / ruta oculta
 - *directory* = carpeta / directorio
-- *response code* = código de respuesta
-- *found* = encontrado
+- *response code* = código de respuesta HTTP
+- *dirb* = herramienta que busca páginas y carpetas ocultas
